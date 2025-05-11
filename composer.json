@@ -1,0 +1,17 @@
+{
+    "name": "gloomy13/node-sentinel",
+    "description": "Application for tracking websites content modifications",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Gloomy13\\NodeSentinel\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "gloomy-at-315686826000",
+            "email": "maks.czkalski@gmail.com"
+        }
+    ],
+    "require": {}
+}
