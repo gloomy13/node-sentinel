@@ -13,5 +13,7 @@
             "email": "maks.czkalski@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "symfony/console": "^7.2"
+    }
 }
