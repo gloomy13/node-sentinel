@@ -2,20 +2,20 @@
 
 namespace Gloomy13\NodeSentinel\Commands\Node;
 
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 #[AsCommand(
-    name: 'node:check',
-    description: "Check the node's content"
+    name:'node:add',
+    description: 'Add node to the watchlist'
 )]
-class CheckCommand extends Command {
+class AddCommand extends Command {
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln("Hello from CheckCommand");
-
+        $output->writeln('Add aaaad AAAAD');
+        
         return Command::SUCCESS;
     }
 }
