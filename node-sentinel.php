@@ -5,6 +5,8 @@ require __DIR__ . '/vendor/autoload.php';
 use Symfony\Component\Console\Application;
 use Gloomy13\NodeSentinel\Commands\Node\CheckCommand;
 
+define('', __DIR__);
+
 $application = new Application();
 
 // commands
