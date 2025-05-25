@@ -6,7 +6,7 @@ use Symfony\Component\Console\Application;
 use Gloomy13\NodeSentinel\Commands\Node\CheckCommand;
 use Gloomy13\NodeSentinel\Commands\Node\AddCommand;
 
-define('', __DIR__);
+define('ROOT_DIR', __DIR__);
 
 $application = new Application();
 
