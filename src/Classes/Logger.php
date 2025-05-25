@@ -9,11 +9,12 @@ class Logger {
 
    /**
     * @param string $root_directory_path
+    * @param string $message
     * @param string $type (optional) Available types: 'error', 'debug' (default)
     * 
     * @return [type]
     */
-    static function log(string $root_directory_path, mixed $value, string $type = 'debug') {
+    static function log(string $root_directory_path, string $message, string $type = 'debug') {
         switch($type)
         {
             case 'debug':
@@ -37,7 +38,7 @@ class Logger {
         $handle = fopen($fullpath, 'a');
         $date = (new DateTime())->format('Y-m-d H:i:s');
 
-        fwrite($handle, "[$date] DEBUG: $value" . PHP_EOL);
+        fwrite($handle, "[$date] DEBUG: $message" . PHP_EOL);
 
         fclose($handle);
     }
