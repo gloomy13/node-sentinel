@@ -13,22 +13,6 @@ class DOMManipulator {
 
         $xpath = new \DOMXPath($dom);
         $this->xpath = $xpath;
-
-        // $classname = 'line-clamp-3 indent-14';
-        // $class1 = 'line-clamp-3';
-        // $class2 = 'text-black';
-        // $id = '568279647528293576-11';
-
-        // $query = "//*[contains(concat(' ', normalize-space(@class), ' '), ' $class1 ')][contains(concat(' ', normalize-space(@class), ' '), ' $class2 ')]";
-        // // $query = "//*[contains(concat(' ', normalize-space(@id), ' '), ' $id ')]";
-
-        // $result = $xpath->query($query);
-
-        // echo'<code>'.__FILE__.':'.__LINE__.'</code>';
-        // echo '<pre>';
-        //     print_r([$result->item(0)->nodeName, $result->item(0)->textContent]);
-        // echo '</pre>';
-        // die;
     }
 
     public function getTextContentOnFirstMatch(string $id = '', array $classes = []): string | bool {
@@ -37,9 +21,9 @@ class DOMManipulator {
         $result = $this->xpath->query($query);
 
         if ($result->count()) {
-            return $result->item(0)->textContent;
+            return trim($result->item(0)->textContent);
         }
-
+        
         return false;
     }
 

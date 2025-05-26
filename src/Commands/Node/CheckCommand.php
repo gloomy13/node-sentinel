@@ -27,7 +27,7 @@ class CheckCommand extends Command {
         $this->addArgument(
             'selectors',
             InputArgument::REQUIRED,
-            'Selectors written in quotation. Dot and hash symbols indicate ids and classes. The result node will have to contain id and all classes that are included.'
+            'Selectors written in quotation marks. Dot (.) and hash (#) symbols indicate ids and classes. The result node will have to contain id and all classes that are included.'
         );
     }
 
@@ -38,13 +38,23 @@ class CheckCommand extends Command {
             print_r([$input->getArguments()]);
         echo '</pre>';
         die;
-        $url = 'https://www.wp.pl/';
+        $url = $input->getArgument('url');
+        $selectors = $input->getArgument('selectors');
+
+        // parse selectors
 
         $request_controller = new RequestController;
         $response = $request_controller->makeRequest($url);
 
         $dom_manipulator = new DOMManipulator($response);
         $text = $dom_manipulator->getTextContentOnFirstMatch('', ['line-clamp-3', 'text-black']);
+
+        if (!$text) {
+            $text = 'Node sentinel: The node does not exist.';
+        }
+        else if (empty($text)) {
+            $text = 'Node sentinel: The node is empty.';
+        }
 
         $output->writeln($text);
 
