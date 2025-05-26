@@ -3,7 +3,7 @@
 namespace Gloomy13\NodeSentinel\Controllers;
 
 class RequestController {
-    function make_request(string $url) : string|bool {
+    function makeRequest(string $url) : string|bool {
         $curl_obj = curl_init($url);
 
         curl_setopt($curl_obj, CURLOPT_RETURNTRANSFER, true);
