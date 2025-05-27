@@ -9,6 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Gloomy13\NodeSentinel\Classes\Logger;
 use Gloomy13\NodeSentinel\Controllers\RequestController;
 use Gloomy13\NodeSentinel\Classes\DOMManipulator;
+use Gloomy13\NodeSentinel\Utils\StringHelper;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
@@ -33,15 +34,17 @@ class CheckCommand extends Command {
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        echo'<code>'.__FILE__.':'.__LINE__.'</code>';
-        echo '<pre>';
-            print_r([$input->getArguments()]);
-        echo '</pre>';
-        die;
         $url = $input->getArgument('url');
         $selectors = $input->getArgument('selectors');
 
         // parse selectors
+        $selectorsArray = StringHelper::parseSelectorsArgument($selectors);
+
+        echo'<code>'.__FILE__.':'.__LINE__.'</code>';
+        echo '<pre>';
+            print_r([$selectorsArray]);
+        echo '</pre>';
+        die;
 
         $request_controller = new RequestController;
         $response = $request_controller->makeRequest($url);
