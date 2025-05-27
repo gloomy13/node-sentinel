@@ -6,12 +6,9 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Gloomy13\NodeSentinel\Classes\Logger;
 use Gloomy13\NodeSentinel\Controllers\RequestController;
 use Gloomy13\NodeSentinel\Classes\DOMManipulator;
 use Gloomy13\NodeSentinel\Utils\StringHelper;
-use Symfony\Component\Console\Input\InputDefinition;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
 #[AsCommand(
@@ -37,20 +34,22 @@ class CheckCommand extends Command {
         $url = $input->getArgument('url');
         $selectors = $input->getArgument('selectors');
 
-        // parse selectors
         $selectorsArray = StringHelper::parseSelectorsArgument($selectors);
 
-        echo'<code>'.__FILE__.':'.__LINE__.'</code>';
-        echo '<pre>';
-            print_r([$selectorsArray]);
-        echo '</pre>';
-        die;
+        $id = '';
+
+        $ids = StringHelper::filterSelectors($selectorsArray, StringHelper::ID_MODE);
+        $classes = StringHelper::filterSelectors($selectorsArray, StringHelper::CLASS_MODE);
+
+        if (!empty($ids)) {
+            $id = $ids[0];
+        }
 
         $request_controller = new RequestController;
         $response = $request_controller->makeRequest($url);
 
         $dom_manipulator = new DOMManipulator($response);
-        $text = $dom_manipulator->getTextContentOnFirstMatch('', ['line-clamp-3', 'text-black']);
+        $text = $dom_manipulator->getTextContentOnFirstMatch($id, $classes);
 
         if (!$text) {
             $text = 'Node sentinel: The node does not exist.';
